@@ -3,14 +3,25 @@
 <html>
   <head>
   <style>
+  -- columnNumberX;
+  -- columnNumberY;
+  #gridContain{
+    justify-items: center;
+    left 50%;
+    position: absolute;
+    margin-left: calc(columnNumberX*30);
+
+
+
+  }
 
 
 #grid {
-  -- columnNumber;
+
 
   display: grid;
-      grid-template-columns:repeat(var(--columnNumber),30px);
-      grid-template-rows:repeat(var(--columnNumber),30px);
+      grid-template-columns:repeat(var(--columnNumberX),30px);
+      grid-template-rows:repeat(var(--columnNumberY),30px);
 
 font-size: 30px;
 font-weight: bold;
@@ -44,11 +55,23 @@ font-weight: bold;
 
 
 }
+
+#title{
+
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: sans-serif;
+  padding-bottom: 15px;
+  background-color: green;
+
+}
 </style>
 <script>
 var turn="x"; // the letter for the  turn
 var squares; // the board squares
-var size=null; // the baord size ie 3x3 4x4 5x5
+var sizeX=null; // the baord size ie 3x3 4x4 5x5
+var sizeY=null;
 
 var computer; // boolean for whether or not you playing computer
 var computerStarts; // boolean for whether the computer starts
@@ -83,38 +106,44 @@ previousSquareY=0;
   computerLetter="o";
   }
 winningSquares=parseInt(document.getElementById("winBox").value);
-  size=parseInt(document.getElementById("sizeBox").value);
+  sizeX=parseInt(document.getElementById("sizeBoxX").value);
 
-  if (size==null || size<3 || isNaN(size) || size%1!==0){
-    size=3;
+  if (sizeX==null || sizeX<3 || isNaN(sizeX) || sizeX%1!==0){
+    sizeX=3;
+
+  }
+  sizeY=parseInt(document.getElementById("sizeBoxX").value);
+
+  if (sizeY==null || sizeY<3 || isNaN(sizeY) || sizeY%1!==0){
+    sizeY=3;
 
   }
    if (winningSquares==null || winningSquares<3 || isNaN(winningSquares) || winningSquares%1!==0){
-    winningSquares=size;
+    winningSquares=3;
 
   }
-if (winningSquares>size){
-  winningSquares=size;
+if (winningSquares>sizeX && winningSquares>sizeY){
+  winningSquares=3;
 
 }
 
 
-  console.log(size);
 
 
   squares=[];
-  for(var count=0 ; count<size; count++){ // make the game board
+  for(var count=0 ; count<sizeX; count++){ // make the game board
    squares[count]=[];
   }
 var element = document.getElementById("grid");
 element.innerHTML="";
 
-document.documentElement.style.setProperty("--columnNumber", size);
+document.documentElement.style.setProperty("--columnNumberX", sizeX);
+document.documentElement.style.setProperty("--columnNumberY", sizeY);
 
-for (var countx=0; countx<size; countx++){
+for (var countx=0; countx<sizeX; countx++){
 
 
-for (var county=0; county<size; county++){ // the board buttons
+for (var county=0; county<sizeY; county++){ // the board buttons
 squares[countx][county]=null;
  var button=document.createElement("button");
      var text = document.createTextNode(" ");
@@ -162,7 +191,7 @@ function checkWin(x, y){ // check to see a if a placed letter yeilds a win
 
   var win=0;
 
-   for (var county=0; county<size; county++){ // check for vertical wins
+   for (var county=0; county<sizeY; county++){ // check for vertical wins
 
 if (inarow===squares[x][county]){
   connectedSquares++;
@@ -188,7 +217,7 @@ if (inarow===squares[x][county]){
 return true;
   }
   connectedSquares=0;
-   for (var countx=0; countx<size; countx++){ // check for horozontal wins
+   for (var countx=0; countx<sizeX; countx++){ // check for horozontal wins
 if (inarow===squares[countx][y]){
   connectedSquares++;
 
@@ -219,11 +248,11 @@ if (inarow===squares[countx][y]){
  var xx=0;
  var yy=0;
 
-    for (var count=0; count<size; count++){
+    for (var count=0; count<sizeX; count++){
       xx=count;
       yy=count+(y-x);
 
-      if (yy>size || xx>size){
+      if (yy>sizeY || xx>sizeX){
         continue;
 
       }
@@ -256,13 +285,13 @@ if (inarow===squares[xx][yy]){ // check for major diagnol wins
 
 
 
-     for (var county=0; county<size; county++){
+     for (var county=0; county<sizeY; county++){
 
 yy=y+x-county;
 
 xx=county;
 
-if (yy>size || xx>size || xx<0){
+if (yy>sizeY || xx>sizeX || xx<0){
   continue;
 
 }
@@ -303,10 +332,10 @@ if (inarow===squares[xx][yy]){ // check for minor diagnol wins
 
   var draw=1; // check for draw
 
-  for (var countx=0; countx<size; countx++){
+  for (var countx=0; countx<sizeX; countx++){
 
 
-for (var county=0; county<size; county++){
+for (var county=0; county<sizeY; county++){
 if (squares[countx][county]===null){
 
   draw=0;
@@ -351,7 +380,7 @@ function computerTurn(){
 
 
 
-   for (var county=0; county<size; county++){
+   for (var county=0; county<sizeY; county++){
 if (inarow===squares[previousSquareX][county]){
   connectedSquares++
 
@@ -368,8 +397,8 @@ if (inarow===squares[previousSquareX][county]){
       startSquare=startSquare-1;
 
     }
-    if (endSquare+1>size-1){
-      endSquare=size-1;
+    if (endSquare+1>sizeY-1){
+      endSquare=sizeY-1;
 
     }
     else{
@@ -407,7 +436,7 @@ endSquare=0;
 
 
 
-   for (var countx=0; countx<size; countx++){
+   for (var countx=0; countx<sizeX; countx++){
      if (inarow===squares[countx][previousSquareY]){
   connectedSquares++
 
@@ -423,8 +452,8 @@ endSquare=0;
       startSquare=startSquare-1;
 
     }
-    if (endSquare+1>size-1){
-      endSquare=size-1;
+    if (endSquare+1>sizeX-1){
+      endSquare=sizeX-1;
 
     }
     else{
@@ -467,7 +496,7 @@ var y=previousSquareY;
     connectedSquares=0;
            yy=0;
 
-     for (var countx=x-y; countx<size; countx++){
+     for (var countx=x-y; countx<sizeX; countx++){
 
 if (inarow===squares[countx][yy]){
   connectedSquares++
@@ -483,8 +512,8 @@ if (inarow===squares[countx][yy]){
       startSquare=startSquare-1;
 
     }
-    if (endSquare+1>size-1){
-      endSquare=size-1;
+    if (endSquare+1>sizeX-1){
+      endSquare=sizeX-1;
 
     }
     else{
@@ -531,7 +560,7 @@ if (inarow===squares[countx][yy]){
     connectedSquares=0;
            xx=0;
 
-     for (var county=y-x; county<size; county++){
+     for (var county=y-x; county<sizeY; county++){
        console.log(connectedSquares);
 
 if (inarow===squares[xx][county]){
@@ -547,8 +576,8 @@ if (inarow===squares[xx][county]){
       startSquare=startSquare-1;
 
     }
-    if (endSquare+1>size-1){
-      endSquare=size-1;
+    if (endSquare+1>sizeY-1){
+      endSquare=sizeY-1;
 
     }
     else{
@@ -609,11 +638,11 @@ var x=countx;
   if (y<0){
     y=0;
   }
-  if (y>size-1){
-    y=size-1;
+  if (y>sizeY-1){
+    y=sizeY-1;
   }
-  if (x>size-1){
-    x=size-1;
+  if (x>sizeX-1){
+    x=sizeX-1;
   }
   if(squares[x][y]===null){
     var text=""+x+" "+y;
@@ -631,7 +660,7 @@ var x=countx;
 }
 
 
-for (var countx=0; countx<size; countx++){
+for (var countx=0; countx<sizeX; countx++){
 
 
 for (var county=previousSquareY-1; county<previousSquareY+1; county++){
@@ -640,8 +669,8 @@ for (var county=previousSquareY-1; county<previousSquareY+1; county++){
     if (y<0){
     y=0;
   }
-  if (y>size-1){
-    y=size-1;
+  if (y>sizeX-1){
+    y=sizeX-1;
   }
     if (squares[x][y]===null){
         var text=""+x+" "+y;
@@ -654,7 +683,7 @@ for (var county=previousSquareY-1; county<previousSquareY+1; county++){
  for (var countx=previousSquareX-1; countx<previousSquareX+1; countx++){
 
 
-for (var county=0; county<size; county++){
+for (var county=0; county<sizeY; county++){
   if (county===previousSquareY && countx===previousSquareX){
     continue;
 
@@ -665,8 +694,8 @@ var x=countx;
     x=0;
   }
 
-  if (x>size-1){
-    x=size-1;
+  if (x>sizeX-1){
+    x=sizeX-1;
   }
   if(squares[x][y]===null){
     var text=""+x+" "+y;
@@ -683,10 +712,10 @@ var x=countx;
 
 }
 }
- for (var countx=0; countx<size; countx++){
+ for (var countx=0; countx<sizeX; countx++){
 
 
-for (var county=0; county<size; county++){
+for (var county=0; county<sizeY; county++){
   if (squares[countx][county]===null){
     var text=""+countx+" "+county;
 
@@ -775,9 +804,17 @@ document.getElementById(id).textContent='O';
 
   </head>
   <body>
+    <div id="title">
+      X-treme Tic Tac Toe
+    </div>
     <div id="settings">
-    <input type='text' id="sizeBox"> </input> Number Of Squares On Board?
-    <input type='text' id="winBox"> </input> Number Of Squares To  Win?
+
+
+     Number Of X Squares On Board?<input type='text' id="sizeBoxX"> </input>
+
+ Number Of Y Squares On Board?   <input type='text' id="sizeBoxY">   </input>
+
+   Number Of Squares To  Win?   <input type='text' id="winBox"> </input>
 
  <input type="checkbox" id="playComputer"> Play Computer?
      <input type="checkbox" id="computerStarts"> Computer Starts?
@@ -788,9 +825,9 @@ document.getElementById(id).textContent='O';
 
 
 
-
+<div id="gridContain">
 <div id='grid'>
-
+</div>
 </div>
 
   </body>
