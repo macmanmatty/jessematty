@@ -20,8 +20,8 @@
 
 
   display: grid;
-      grid-template-columns:repeat(var(--columnNumberX),30px);
-      grid-template-rows:repeat(var(--columnNumberY),30px);
+      grid-template-columns:repeat(var(--columnNumberY),30px);
+      grid-template-rows:repeat(var(--columnNumberX),30px);
 
 font-size: 30px;
 font-weight: bold;
@@ -48,6 +48,7 @@ font-weight: bold;
   box-sizing: border-box;
   width: 30px;
     padding-bottom: 30px;
+    font-size: 20px;
 
 
 }
@@ -131,19 +132,23 @@ if (winningSquares>sizeX && winningSquares>sizeY){
 
 
   squares=[];
-  for(var count=0 ; count<sizeX; count++){ // make the game board
-   squares[count]=[];
-  }
+
 var element = document.getElementById("grid");
 element.innerHTML="";
 
 document.documentElement.style.setProperty("--columnNumberX", sizeX);
 document.documentElement.style.setProperty("--columnNumberY", sizeY);
 
+
+
+for(var count=0 ; count<sizeY; count++){ // make the game board
+ squares[count]=[];
+}
+
 for (var countx=0; countx<sizeX; countx++){
 
-
 for (var county=0; county<sizeY; county++){ // the board buttons
+
 squares[countx][county]=null;
  var button=document.createElement("button");
      var text = document.createTextNode(" ");
@@ -175,7 +180,7 @@ squares[countx][county]=null;
 
 }
 }
-  if (computerStarts===true){
+  if (computerStarts===true && computer===true){
 
     computerTurn();
 
@@ -187,6 +192,7 @@ squares[countx][county]=null;
 function checkWin(x, y){ // check to see a if a placed letter yeilds a win
 
   var inarow=squares[x][y];
+  console.log("turn " +inarow);
   var connectedSquares=0;
 
   var win=0;
@@ -199,6 +205,7 @@ if (inarow===squares[x][county]){
   if (connectedSquares===winningSquares){
 
   win=1;
+
 
   break;
 
@@ -247,8 +254,8 @@ if (inarow===squares[countx][y]){
 
  var xx=0;
  var yy=0;
-
-    for (var count=0; count<sizeX; count++){
+// check for major diagnol wins
+    for (var count=0; count<sizeY; count++){
       xx=count;
       yy=count+(y-x);
 
@@ -259,8 +266,7 @@ if (inarow===squares[countx][y]){
 
 
 
-
-if (inarow===squares[xx][yy]){ // check for major diagnol wins
+if (inarow===squares[xx][yy]){
  connectedSquares++;
  if (connectedSquares===winningSquares ){
 
@@ -283,8 +289,7 @@ if (inarow===squares[xx][yy]){ // check for major diagnol wins
 
 
 
-
-
+// check for minor diagnol wins
      for (var county=0; county<sizeY; county++){
 
 yy=y+x-county;
@@ -299,7 +304,7 @@ if (yy>sizeY || xx>sizeX || xx<0){
 
 
 
-if (inarow===squares[xx][yy]){ // check for minor diagnol wins
+if (inarow===squares[xx][yy]){
   connectedSquares++;
 
   if (connectedSquares===winningSquares ){
@@ -810,9 +815,8 @@ document.getElementById(id).textContent='O';
     <div id="settings">
 
 
-     Number Of X Squares On Board?<input type='text' id="sizeBoxX"> </input>
+     Number of X and  Y Squares On Board?<input type='text' id="sizeBoxX"> </input>
 
- Number Of Y Squares On Board?   <input type='text' id="sizeBoxY">   </input>
 
    Number Of Squares To  Win?   <input type='text' id="winBox"> </input>
 
