@@ -32,16 +32,15 @@ width:100%;
 padding-top: 0px;
 padding-bottom: 0px;
 margin: 0px;
-top: 100px;
+top: 150px;
 display: inline-block;
-
 
 }
 #languages{
 position: absolute;
 font-size: 24px;
 font-weight: normal;
-top:300px;
+top:400px;
 
 }
 .langs{
@@ -62,7 +61,7 @@ line-height:0px;
 }
 
 #projectsTitle{
-  top:850px;
+  top:950px;
   position: absolute;
   font-size: 30px;
   border-bottom: 2px solid black;
@@ -81,7 +80,7 @@ line-height:0px;
   position: absolute;
   font-size: 18px;
   font-weight: normal;
-  top: 220px;
+  top: 310px;
 
 
 
@@ -130,7 +129,6 @@ top:1000px;
 
 font-size:24px;
 font-weight: bold;
-padding-right: 10px;
 
 
 
@@ -142,9 +140,6 @@ padding-right: 10px;
 
 .imageButton {
   float: left;
-  padding-right: 10px;
-
-
 }
 
 
@@ -195,7 +190,7 @@ padding-right: 10px;
   position: absolute;
   font-size: 24px;
   font-weight: normal;
-  top:360px;
+  top:460px;
 
   }
 #hr {
@@ -232,7 +227,7 @@ padding-right: 10px;
     position: absolute;
     font-size: 18px;
     font-weight: normal;
-    top:220px;
+    top:310px;
 
 
 
@@ -259,7 +254,7 @@ padding-right: 10px;
 
 
   #projectsTitle{
-    top:965px;
+    top:1065px;
     position: absolute;
     font-size: 30px;
     border-bottom: 2px solid black;
@@ -300,12 +295,6 @@ padding-right: 10px;
 
   }
 
-
-  .imageButton {
-    float: left;
-    padding-right: 10px;
-
-  }
 
 
 
@@ -349,7 +338,7 @@ padding-right: 10px;
   position: absolute;
   font-size: 24px;
   font-weight: normal;
-  top:400px;
+  top:500px;
 
   }
   .langs{
@@ -382,14 +371,14 @@ padding-right: 10px;
     position: absolute;
     font-size: 18px;
     font-weight: normal;
-    top:220px;
+    top:310px;
 
 
 
   }
 
   #projectsTitle{
-    top:950px;
+    top:1150px;
     position: absolute;
     font-size: 30px;
     border-bottom: 2px solid black;
@@ -444,8 +433,6 @@ padding-right: 10px;
   .imageButton  {
     width: 75px;
     height: auto;
-    padding-right: 10px;
-
   }
 }
 
@@ -488,7 +475,7 @@ padding-right: 10px;
     position: absolute;
     font-size: 24px;
     font-weight: normal;
-    top:480px;
+    top:580px;
 
     }
     .langs{
@@ -521,7 +508,7 @@ padding-right: 10px;
       position: absolute;
       font-size: 18px;
       font-weight: normal;
-      top:220px;
+      top:310px;
 
 
 
@@ -529,7 +516,7 @@ padding-right: 10px;
 
     #projectsTitle{
 
-      top:1150px;
+      top:1250px;
       position: absolute;
       font-size: 30px;
       border-bottom: 2px solid black;
@@ -581,7 +568,8 @@ padding-right: 10px;
 
     }
     .imageButton  {
-      padding-right: 10px;
+      float: left;
+display: inline-block;
       width: 45px;
       height: auto;
     }
@@ -609,20 +597,19 @@ padding-right: 10px;
 <div id="menu">
 <div id ="menu1">
 
-    <a href="https://github.com/macmanmatty"  target="_blank" id="github" class="as">  <img class="imageButton"  src="./Buttons/github1.png">  </a>
+    <a href="https://github.com/macmanmatty"  target="_blank" id="github" class="as">  <img class="imageButton"  src="./buttons/github1.png">  </a>
 
-      <a href="https://app.codesignal.com/profile/jesse_m24"  target="_blank" id="codesignal" class="as"> <img class="imageButton"  src="./Buttons/codesignal1.png">  </a>
+      <a href="https://app.codesignal.com/profile/jesse_m24"  target="_blank" id="codesignal" class="as"> <img class="imageButton"  src="./buttons/codesignal1.png">  </a>
 
-          <a href="https://www.linkedin.com/in/jesse-matty-a4b348169/"  target="_blank" id="linkedin" class="as"> <img class="imageButton"  src="./Buttons/linkedin.png">  </a>
-
-
+          <a href="https://www.linkedin.com/in/jesse-matty-a4b348169/"  target="_blank" id="linkedin" class="as"> <img class="imageButton"  src="./buttons/linkedin.png">  </a>
 
 
 
 
-      <a href="mailto:jamatty@gmail.com "  target="_blank" id="codepen" class="as"> <img class="imageButton"  src="./Buttons/email.png">  </a>
 
-      <a href="resume.odt"  target="_blank" id="linkedin" class="as"> <img class="imageButton"  src="./Buttons/resume.png">  </a>
+
+      <a href="mailto:jamatty@gmail.com "  target="_blank" id="codepen" class="as"> <img class="imageButton"  src="./buttons/email.png">  </a>
+
 
 
   </div>
@@ -774,13 +761,13 @@ Reaper
 
 <td class="project">
 <p class="pName"> Tic Tac Toe </p>
-<p>  A JavaScript  Extreme TicTacToe game I wrote </p>
-<a href="tictactoe.html"> <img class="image" src="./photos/tictactoe.png"> </a>
+<p>  A JavaScript TicTacToe game I wrote </p>
+<a href="tictactoe.php"> <img class="image" src="./photos/tictactoe.png"> </a>
 </td>
 <td class="project">
 <p class="pName"> Bar Hopn Charters </p>
 <p>  A site I built for  a charter fishing captian  </p>
-<a href="http://www.barhopncharters.com/"> <img class="image" src="./photos/barHopin.png"> </a>
+<a href="http://www.barhopncharters.com/"> <img class="image" src="./photos/barhopin.png"> </a>
 
 </td>
 </tr>
