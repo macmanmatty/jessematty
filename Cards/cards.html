@@ -1,0 +1,373 @@
+<html>
+<head>
+
+    <style>
+       
+     
+        #cards{
+
+            top: 30px;
+            position: relative;
+           
+            
+
+            
+
+        }
+        #cardStartNumbers{
+
+        top: 30px;
+        position: relative;
+        z-index: 100;
+
+        }
+
+
+        .cardStartNumber{
+            font-size: 20px;
+            font-weight: 400;
+         
+
+        }
+        #head{
+            font-size: 30px;
+            position: relative;
+        }
+       
+        .text{
+        font-size:14px ;
+
+        }
+
+        #info{
+            font-size:12px ;
+
+        }
+
+        #cardPositions{
+
+        display: block;
+        }
+
+
+        </style>
+
+        <script>
+            var cards = [];
+            var delt=false;
+           
+            class Card {
+                
+                constructor(cardNumber, startNumber){
+
+            this.cardNumber=cardNumber;
+             this.startNumber=startNumber;
+                }
+
+
+            }
+          
+
+            function dealCards(){
+                delt=true;
+                var jokers=document.getElementById("jokers").checked;
+                var numberOfCards=52;
+                if(jokers===true){
+                numberOfCards=54;
+                }
+
+    
+                for( count=0; count<numberOfCards; count++){
+                    var number=count+1;
+
+                    cards[count]=new Card(number, number);
+                   
+                }
+                var shuffle=document.getElementById("randomShuffle").checked;
+                if(shuffle===true){
+                    randomShuffle();
+                }
+                else{
+
+                displayCards();
+
+                }
+
+                
+
+
+            }
+
+            function getCardPosition(number){
+
+                for(count=0; count<cards.length; count++){
+
+                    if(cards[count].startNumber==number){
+
+
+                        return count+1;
+
+                    }
+
+
+                }
+
+
+            }
+
+            function displayCards(){
+                   var cardPositions= document.getElementById("cardPositions");
+                  cardPositions.innerHTML="";
+                   var  card0Position= document.createElement("div");
+                   card0Position.innerText="Current Position In Deck Of Card 1: "+getCardPosition(1);
+                   var  card52Position= document.createElement("div");
+                   card52Position.innerText="Current Position In Deck Of Card 52: "+getCardPosition(52);
+                   cardPositions.appendChild(card0Position);
+                   cardPositions.appendChild(card52Position);
+                document.getElementById("cards").innerHTML="";
+
+                for(count=0; count<cards.length; count++){
+                    var cardNumber=cards[count].cardNumber;
+                    var cardStartNumber=cards[count].startNumber;
+                var image =document.createElement("img");
+                var cardStartNumberLabel=document.createElement("span");
+                var cardDiv=document.createElement("label");
+                cardDiv.class="cardDiv";
+                image.id="image"+cardNumber;
+                cardStartNumberLabel.id="number"+cardStartNumber;
+                image.class="card";
+                cardStartNumberLabel.class="cardStartNumber";  
+                cardStartNumberLabel.left=image.left-20;
+                cardStartNumberLabel.top=image.top-20;
+                image.src="Images/"+cardNumber+".png";
+                image.width=100;
+                image.height=150;
+                if(cardStartNumber<10){
+                    cardStartNumber="0"+cardStartNumber;
+                }
+
+                cardStartNumberLabel.textContent=cardStartNumber;
+                cardDiv.appendChild(image);
+                cardDiv.appendChild(cardStartNumberLabel);
+                document.getElementById("cards").append(cardDiv); 
+
+
+              
+
+                }
+
+
+            }
+
+
+           
+
+
+        
+   
+
+
+            function perfectShuffle(){
+
+                if(delt===false){
+                    alert("you must deal cards first");
+                    return;
+
+
+            }
+
+                var halfCards1= [];
+                var halfCards2= [];
+                var size=cards.length/2;
+                for(count=0; count<size; count++){
+                    halfCards1[count]=cards[count];
+
+                }
+                for(count=size; count<cards.length; count++){
+                    halfCards2[count-size]=cards[count];
+
+                }
+                
+
+                
+                for(count=0; count<size; count++){
+                    cards[count*2]=halfCards1[count];
+                    cards[count*2+1]=halfCards2[count];
+
+                }
+                for(count=0; count<cards.length; count++){
+                  console.log("Card Number "+count+": "+ cards[count].cardNumber);
+
+
+                }
+
+                displayCards();
+
+
+
+            }
+
+            function randomShuffle(){
+                var random=Math.floor(Math.random() * cards.length) + 1
+                console.log(random);
+
+if(delt===false){
+    alert("you must deal cards first");
+    return;
+
+
+}
+
+var halfCards1= [];
+var halfCards2= [];
+
+for(count=0; count<random; count++){
+    halfCards1[count]=cards[count];
+
+}
+for(count=random; count<cards.length; count++){
+    halfCards2[count-random]=cards[count];
+
+}
+var size=26;
+if(halfCards1.length>=halfCards2.length){
+    size=halfCards2.length
+}
+else{
+    size=halfCards1.length
+}
+var leftOverCards=cards.length-(size*2);
+
+
+
+
+
+if(random%3===0 || random%5==0){
+    
+
+for(count=0; count<size; count++){
+    cards[count*2]=halfCards1[count];
+    cards[count*2+1]=halfCards2[count];
+
+}
+if(halfCards1.length>halfCards2.length){
+
+for(count=size; count<halfCards1.length; count++){
+
+    cards[count+size]=halfCards1[count];
+  
+
+}
+
+
+}
+else if(halfCards2.length>halfCards1.length){
+    for(count=size; count<halfCards2.length; count++){
+
+cards[count+size]=halfCards2[count];
+
+
+}
+
+}
+
+
+
+
+
+}
+else{
+    for(count=0; count<size; count++){
+    cards[count*2]=halfCards2[count];
+    cards[count*2+1]=halfCards1[count];
+
+}
+if(halfCards1.length>halfCards2.length){
+
+for(count=size; count<halfCards1.length; count++){
+
+    cards[count+size]=halfCards1[count];
+  
+
+}
+
+
+}
+else if(halfCards2.length>halfCards1.length){
+    for(count=size; count<halfCards2.length; count++){
+
+cards[count+size]=halfCards2[count];
+
+
+}
+
+}
+
+
+}
+
+
+for(count=0; count<cards.length; count++){
+  console.log("Card Number "+count+": "+ cards[count].cardNumber);
+
+
+}
+
+displayCards();
+
+
+
+}
+            
+            
+
+            </script>
+</head>
+
+
+<bod id="body">
+
+    <div id="head">
+        Card Shuffler
+
+       
+        <button  onclick="dealCards(); return false;"> Deal Cards </button>
+        <button onClick="perfectShuffle(); return false;"> Perfect  Shuffle Cards </button>
+        <button onClick="randomShuffle(); return false;">  Random Shuffle Cards </button>
+
+        <input type="checkbox" id="jokers">  <label class="text"> Use Jokers? </label>
+     <input type="checkbox" id="randomShuffle">  <label class="text"> Start With Random Shuffle? </label>
+
+     <p id="info">
+
+       Click the button "Perfect Shuffle" to shuffle the displayed  cards with an  'in shuffle". 
+       An ‘in shuffle’ is a perfect shuffle on a standard deck of playing cards that splits the deck in to two equal  halfs, 
+       then interleaves cards starting with the top half. 
+       Click the button to random shuffle to  interleave  to random size  parts of the deck randomly starting with the top or the bottom.  
+       Use jokers option adds jokers to the deck.
+        Start  with random shuffle randomly shuffles the deck before  before displaying it. 
+        The number next to each card is it's starting position in the deck before being shuffled.
+
+
+
+
+     </p>
+
+      
+
+    </div>
+    <div id="cardPositions">
+
+    </div>
+    <div id="cards">
+       
+
+    </div>
+   
+
+
+
+   
+
+</body>
+</html>
